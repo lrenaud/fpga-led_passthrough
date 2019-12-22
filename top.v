@@ -1,3 +1,5 @@
+`include "led_map.v"
+
 // look in pins.pcf for all the pin names on the TinyFPGA BX board
 module top (
     input CLK,		// 16MHz clock
@@ -34,6 +36,30 @@ module top (
     // light up the LED according to the pattern
     assign LED_USER = blink_pattern[blink_counter[25:21]];
 
-	assign {LED1,LED2,LED3,LED4} = {SW1,SW2,SW3,SW4};
+	/**************************************************************************/
+	/**************************************************************************/
+
+	wire [3:0] LED_BUS = {LED1,LED2,LED3,LED4};
+	wire [3:0] SW_BUS = {SW1,SW2,SW3,SW4};
+
+	//assign LED_BUS ;
+	//assign SW_BUS ;
+	
+	led_map_block U_BUS_ASSIGNMENT(
+		SW_BUS,
+		LED_BUS
+	);
+
+	//assign LED_BUS[0] = | SW_BUS;
+	//assign LED_BUS[1] = & SW_BUS;
+	//assign LED_BUS[2] = ^ SW_BUS;
+	//assign LED_BUS[3] = SW_BUS[3];
+
+	//assign LED_BUS = SW_BUS;
+
+	//assign {LED1,LED2,LED3,LED4} = {SW1,SW2,SW3,SW4};
+	
+	/**************************************************************************/
+	/**************************************************************************/
 
 endmodule
