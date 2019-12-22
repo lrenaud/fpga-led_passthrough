@@ -23,12 +23,17 @@ PACKAGE = cm81
 
 all: $(PROJ).rpt $(PROJ).bin
 
-%.blif: %.v
+# Pseudo-target used to for updates if ANY verilog files
+# change in the library directory.
+library/.lastmake: $(shell find library/ -type f -name "*.v")
+	@touch $@
+
+%.blif: %.v library/.lastmake
 	yosys -p 'synth_ice40 -top $(PROJ) -blif $@' $<
 	# Arache-PNR Mode
 
-%.json: %.v
-	yosys -p 'synth_ice40 -top $(PROJ) -json $@' $^
+%.json: %.v library/.lastmake
+	yosys -p 'synth_ice40 -top $(PROJ) -json $@' $<
 
 %.asc: %.json $(PIN_DEF)
 	nextpnr-ice40 --$(DEVICE) --package $(PACKAGE) \
