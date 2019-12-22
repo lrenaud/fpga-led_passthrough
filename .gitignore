@@ -1,0 +1,10 @@
+.directory
+*~
+*.rpt
+*.asc
+*.blif
+*.json
+*.vcd
+*_syn.v
+*_syntb
+*.bin
