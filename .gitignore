@@ -6,5 +6,5 @@
 *.json
 *.vcd
 *_syn.v
-*_syntb
+*tb
 *.bin

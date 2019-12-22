@@ -28,7 +28,7 @@ all: $(PROJ).rpt $(PROJ).bin
 	# Arache-PNR Mode
 
 %.json: %.v
-	yosys -p 'synth_ice40 -top $(PROJ) -json $@' $?
+	yosys -p 'synth_ice40 -top $(PROJ) -json $@' $^
 
 %.asc: %.json
 	nextpnr-ice40 --$(DEVICE) --package $(PACKAGE) --pcf $(PIN_DEF)\
@@ -57,6 +57,11 @@ all: $(PROJ).rpt $(PROJ).bin
 %_syntb.vcd: %_syntb
 	vvp -N $< +vcd=$@
 
+
+sim: $(PROJ)_tb.vcd
+
+postsim: $(PROJ)_syntb.vcd
+
 prog: $(PROJ).bin
 	tinyprog -p $<
 
@@ -67,5 +72,8 @@ sudo-prog: $(PROJ).bin
 clean:
 	rm -f $(PROJ).blif $(PROJ).asc $(PROJ).rpt $(PROJ).bin $(PROJ).json
 
+clean_sim:
+	rm -f $(PROJ)_tb.vcd $(PROJ)_syntb.vcd
+
 .SECONDARY:
-.PHONY: all prog clean
+.PHONY: all prog clean clean_sim
