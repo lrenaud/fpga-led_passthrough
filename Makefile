@@ -30,11 +30,12 @@ all: $(PROJ).rpt $(PROJ).bin
 %.json: %.v
 	yosys -p 'synth_ice40 -top $(PROJ) -json $@' $^
 
-%.asc: %.json
-	nextpnr-ice40 --$(DEVICE) --package $(PACKAGE) --pcf $(PIN_DEF)\
-		--json $? --asc $@
-#%.asc: %.blif
-#	arachne-pnr -d 8k -P cm81 -o $@ -p $(PIN_DEF) $?
+%.asc: %.json $(PIN_DEF)
+	nextpnr-ice40 --$(DEVICE) --package $(PACKAGE) \
+		--pcf $(filter %.pcf,$^) \
+		--json $(filter %.json,$^) --asc $@
+#%.asc: $(PIN_DEF) %.blif
+#	arachne-pnr -d 8k -P cm81 -o $@ -p $(filter %.pcf,$^) $(filter %.blif,$^)
 
 %.bin: %.asc
 	icepack $< $@
@@ -57,7 +58,6 @@ all: $(PROJ).rpt $(PROJ).bin
 %_syntb.vcd: %_syntb
 	vvp -N $< +vcd=$@
 
-
 sim: $(PROJ)_tb.vcd
 
 postsim: $(PROJ)_syntb.vcd
@@ -73,7 +73,7 @@ clean:
 	rm -f $(PROJ).blif $(PROJ).asc $(PROJ).rpt $(PROJ).bin $(PROJ).json
 
 clean_sim:
-	rm -f $(PROJ)_tb.vcd $(PROJ)_syntb.vcd
+	rm -f $(PROJ)_tb $(PROJ)_syntb
 
 .SECONDARY:
 .PHONY: all prog clean clean_sim
