@@ -47,16 +47,16 @@ set_io --warn-no-port PIN_6 D2
 set_io --warn-no-port PIN_7 D1
 set_io --warn-no-port PIN_8 E2
 set_io --warn-no-port PIN_9 E1
-set_io --warn-no-port LED1 G2
-set_io --warn-no-port LED2 H1
-set_io --warn-no-port LED3 J1
-set_io --warn-no-port LED4 H2
+set_io --warn-no-port LED_BUS[0] G2
+set_io --warn-no-port LED_BUS[1] H1
+set_io --warn-no-port LED_BUS[2] J1
+set_io --warn-no-port LED_BUS[3] H2
 
 # Right side of board
-set_io --warn-no-port -pullup yes SW4 H9
-set_io --warn-no-port -pullup yes SW3 D9
-set_io --warn-no-port -pullup yes SW2 D8
-set_io --warn-no-port -pullup yes SW1 C9
+set_io --warn-no-port -pullup yes SW[3] H9
+set_io --warn-no-port -pullup yes SW[2] D9
+set_io --warn-no-port -pullup yes SW[1] D8
+set_io --warn-no-port -pullup yes SW[0] C9
 set_io --warn-no-port PIN_18 A9
 set_io --warn-no-port PIN_19 B8
 set_io --warn-no-port PIN_20 A8

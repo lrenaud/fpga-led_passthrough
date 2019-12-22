@@ -4,15 +4,9 @@
 module top (
     input CLK,		// 16MHz clock
 	// inout for pullup
-	input SW1,
-	input SW2,
-	input SW3,
-	input SW4,
+	input [3:0] SW,
     output LED_USER,	// User/boot LED next to power LED
-	output LED1,
-	output LED2,
-	output LED3,
-	output LED4,
+	output [3:0] LED_BUS,
     output USBPU	// USB pull-up resistor
 );
     // drive USB pull-up resistor to '0' to disable USB
@@ -39,14 +33,8 @@ module top (
 	/**************************************************************************/
 	/**************************************************************************/
 
-	wire [3:0] LED_BUS = {LED1,LED2,LED3,LED4};
-	wire [3:0] SW_BUS = {SW1,SW2,SW3,SW4};
-
-	//assign LED_BUS ;
-	//assign SW_BUS ;
-	
 	led_map_block U_BUS_ASSIGNMENT(
-		SW_BUS,
+		SW,
 		LED_BUS
 	);
 
