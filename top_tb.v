@@ -23,20 +23,21 @@ module top_tb;
 	initial begin
 		if ($value$plusargs("vcd=%s", vcdfile)) begin
 			$dumpfile(vcdfile);
-			$dumpvars(0, top_tb);
+			$dumpvars(1, U_top.SW, U_top.LED_USER, U_top.brightness, U_top.LED_0, U_top.LED_1, U_top.LED_2, U_top.LED_3);
 		end
 
-		tb_sw = 4'b0000;
+		tb_sw = 4'b1111;
 
 		repeat (20) @(posedge tb_clk);
 
 		$display("starting.");
-		repeat (16) begin
-			repeat (10) @(posedge tb_clk);
-			tb_sw = (1 + tb_sw);
-		end 
+		repeat (1_10) begin
+			repeat (1_1000) begin
+				repeat (16) @(posedge tb_clk);
+			end 
+			//$display(".");
+		end
 
-		repeat (20) @(posedge tb_clk);
 		$display("done!");
 		$finish;
 	end

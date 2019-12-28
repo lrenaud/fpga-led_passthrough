@@ -1,0 +1,37 @@
+[*]
+[*] GTKWave Analyzer v3.3.101 (w)1999-2019 BSI
+[*] Sat Dec 28 22:05:55 2019
+[*]
+[dumpfile] "/home/luke/Development/verilog/led_passthrough/top_tb.vcd"
+[dumpfile_mtime] "Sat Dec 28 22:05:03 2019"
+[dumpfile_size] 4658060
+[savefile] "/home/luke/Development/verilog/led_passthrough/top_tb_2.gtkw"
+[timestart] 0
+[size] 1162 823
+[pos] -1 -1
+*-25.343124 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] top_tb.
+[sst_width] 200
+[signals_width] 158
+[sst_expanded] 1
+[sst_vpaned_height] 233
+@22
+top_tb.U_top.LED_BUS[3:0]
+@28
+top_tb.U_top.LED_USER
+@22
+top_tb.U_top.SW[3:0]
+top_tb.U_top.brightness[15:0]
+@8022
+top_tb.U_top.fast_clock[15:0]
+@20000
+-
+-
+-
+-
+@20001
+-
+@20000
+-
+[pattern_trace] 1
+[pattern_trace] 0
