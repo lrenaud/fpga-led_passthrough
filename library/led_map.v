@@ -1,4 +1,4 @@
-module led_map_block (
+module led_map (
 	input [3:0] switch,
 	output [3:0] led
 );

@@ -1,4 +1,4 @@
-
+`timescale 100ps/1ps
 //`include "top.v"
 
 module top_tb;
